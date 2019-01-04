@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>雨中過客</title>
   
-  <subtitle>愿得一人心 白首不相离</subtitle>
+  <subtitle>心情不好就不想说话</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kejieliu.github.io/"/>
-  <updated>2018-12-29T01:04:42.454Z</updated>
+  <updated>2019-01-04T02:29:06.966Z</updated>
   <id>https://kejieliu.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React Lifecycle总结</title>
+    <link href="https://kejieliu.github.io/2019/01/03/ReactLifecycle/"/>
+    <id>https://kejieliu.github.io/2019/01/03/ReactLifecycle/</id>
+    <published>2019-01-03T14:52:52.000Z</published>
+    <updated>2019-01-04T02:29:06.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>生命周期版本根据React version 16.4进行整理<br><a href="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" target="_blank" rel="noopener">React Lifecycle</a></p><p>ADD:<br>getDerivedStateFromProps<br>getSnapshotBeforeUpdate<br>UNSAFE:<br>UNSAFE_componentWillMount<br>UNSAFE_componentWillUpdate<br>UNSAFE_componentWillReceiveProps</p><a id="more"></a><p>常用的生命周期图<br><img src="/assets/react/lifecycle1.png"><br>在常用的生命周期之外，显示不常用的生命周期图<br><img src="/assets/react/lifecycle2.png"></p><h4 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting"></a>Mounting</h4><h5 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor()"></a><a href="https://reactjs.org/docs/react-component.html#constructor" target="_blank" rel="noopener">constructor()</a></h5><h5 id="static-getDerivedStateFromProps"><a href="#static-getDerivedStateFromProps" class="headerlink" title="static getDerivedStateFromProps()"></a><a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops" target="_blank" rel="noopener">static getDerivedStateFromProps()</a></h5><p>用于替代<a href="https://reactjs.org/docs/react-component.html#unsafe_componentwillupdate" target="_blank" rel="noopener">UNSAFE_componentWillUpdate()</a></p><h5 id="render"><a href="#render" class="headerlink" title="render()"></a><a href="https://reactjs.org/docs/react-component.html#render" target="_blank" rel="noopener">render()</a></h5><h5 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a><a href="https://reactjs.org/docs/react-component.html#componentdidmount" target="_blank" rel="noopener">componentDidMount()</a></h5><h5 id="UNSAFE-componentWillMount"><a href="#UNSAFE-componentWillMount" class="headerlink" title="UNSAFE_componentWillMount()"></a><a href="https://reactjs.org/docs/react-component.html#unsafe_componentwillmount" target="_blank" rel="noopener">UNSAFE_componentWillMount()</a></h5><p>v17会移除</p><h4 id="Updating"><a href="#Updating" class="headerlink" title="Updating"></a>Updating</h4><h5 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate()"></a><a href="https://reactjs.org/docs/react-component.html#componentdidupdate" target="_blank" rel="noopener">componentDidUpdate()</a></h5><h4 id="Unmounting"><a href="#Unmounting" class="headerlink" title="Unmounting"></a>Unmounting</h4><h5 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount()"></a><a href="https://reactjs.org/docs/react-component.html#componentwillunmount" target="_blank" rel="noopener">componentWillUnmount()</a></h5><h4 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h4><p>参考<br><a href="https://juejin.im/post/5bea68a6e51d450cb20fdd70" target="_blank" rel="noopener">拥抱react新生命周期–getDerivedStateFromProps</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;生命周期版本根据React version 16.4进行整理&lt;br&gt;&lt;a href=&quot;http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;React Lifecycle&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ADD:&lt;br&gt;getDerivedStateFromProps&lt;br&gt;getSnapshotBeforeUpdate&lt;br&gt;UNSAFE:&lt;br&gt;UNSAFE_componentWillMount&lt;br&gt;UNSAFE_componentWillUpdate&lt;br&gt;UNSAFE_componentWillReceiveProps&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="React" scheme="https://kejieliu.github.io/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>Java学习记录</title>
