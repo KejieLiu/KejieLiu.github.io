@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Mysql,数据库,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雨中過客" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/panda.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta name="keywords" content="Mysql,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql索引问题">
+<meta property="og:url" content="https://kejieliu.github.io/2019/01/14/Mysql索引问题/index.html">
+<meta property="og:site_name" content="雨中過客">
+<meta property="og:description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/F5FFD2CE-5CFA-4169-80B1-C7B1BC315FF0.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/BC5B6725-30E7-443A-8C1D-18A0465268A0.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/1CDF6121-0591-4E84-8982-257C9CF133D9.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/12CDFB9C49C6B68DA3F810FC365848ED.gif">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/85D652EBF843713865D57FFEC1CB1344.gif">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/A17AC5E6-D838-4856-8483-D0146D146D3F.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/AC3A2EEA-C772-47E1-8293-2A4ADCA7B155.png">
+<meta property="og:image" content="https://kejieliu.github.io/assets/mysql/9DF2F74B-3C71-4C6E-A6CB-D4DDC340232D.png">
+<meta property="og:updated_time" content="2019-01-15T02:41:23.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql索引问题">
+<meta name="twitter:description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta name="twitter:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kejieliu.github.io/2019/01/14/Mysql索引问题/">
+
+
+
+
+
+  <title>Mysql索引问题 | 雨中過客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567636f3666e9aed92f683116924b5cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">雨中過客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心情不好就不想说话</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kejieliu.github.io/2019/01/14/Mysql索引问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jim Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/img/panda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雨中過客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql索引问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-14T19:06:25+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span> </span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span> </span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) ) </span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<p>添加索引情况如下：<br>索引情况较乱<br><img src="/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png" width="75%"><br>在查询一句Sql时，发现加limit与不加limit差异巨大<br>不加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png" width="35%"><br>需要1.77秒<br>加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/F5FFD2CE-5CFA-4169-80B1-C7B1BC315FF0.png" width="35%"><br>需要15.00秒</p>
+<h3 id="Mysql-Explain分析"><a href="#Mysql-Explain分析" class="headerlink" title="Mysql Explain分析"></a>Mysql Explain分析</h3><p>我们使用Mysql的Explanin来分析SQL语句，先来看下Explain的使用<br>点击学习<a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br>Explain输出格式<br><strong>select_type</strong></p>
+<ol>
+<li><strong>SIMPLE, 表示此查询不包含 UNION 查询或子查询</strong></li>
+<li>PRIMARY, 表示此查询是最外层的查询</li>
+<li>UNION, 表示此查询是 UNION 的第二或随后的查询</li>
+<li>DEPENDENT UNION, UNION 中的第二个或后面的查询语句, 取决于外面的查询</li>
+<li>UNION RESULT, UNION 的结果</li>
+<li>SUBQUERY, 子查询中的第一个 SELECT</li>
+<li>DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果</li>
+</ol>
+<p><strong>table</strong><br>表示查询涉及的表或衍生表</p>
+<p><strong>type</strong></p>
+<ol>
+<li>system：表中只有一条数据. 这个类型是特殊的 const 类型.</li>
+<li>const：针对主键或唯一索引的等值查询扫描, 最多只返回一行数据. const 查询速度非常快, 因为它仅仅读取一次即可.</li>
+<li>eq_ref：此类型通常出现在多表的 join 查询, 表示对于前表的每一个结果, 都只能匹配到后表的一行结果. 并且查询的比较操作通常是 =, 查询效率较高.</li>
+<li>ref：此类型通常出现在多表的 join 查询, 针对于非唯一或非主键索引, 或者是使用了 最左前缀 规则索引的查询. </li>
+<li>range：表示使用索引范围查询, 通过索引字段范围获取表中部分数据记录. 这个类型通常出现在 =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, IS NULL, &lt;=&gt;, BETWEEN, IN() 操作中.</li>
+<li>index：表示全索引扫描(full index scan), 和 ALL 类型类似, 只不过 ALL 类型是全表扫描, 而 index 类型则仅仅扫描所有的索引, 而不扫描数据.</li>
+<li>ALL：表示全表扫描, 这个类型的查询是性能最差的查询之一.<br>性能比较：<br><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></li>
+</ol>
+<p><strong>possible_keys</strong><br>表示 MySQL 在查询时, 能够使用到的索引. 注意, 即使有些索引在 possible_keys 中出现, 但是并不表示此索引会真正地被 MySQL 使用到. MySQL 在查询时具体使用了哪些索引, 由 key 字段决定.</p>
+<p><strong>key</strong><br>此字段是 MySQL 在当前查询时所真正使用到的索引.</p>
+<p><strong>key_len</strong><br>表示查询优化器使用了索引的字节数. 这个字段可以评估组合索引是否完全被使用, 或只有最左部分字段被使用到.</p>
+<ul>
+<li>字符串<br>  char(n): n 字节长度<br>  varchar(n): 如果是 utf8 编码, 则是 3 n + 2字节; 如果是 utf8mb4 编码, 则是 4 n + 2 字节.</li>
+<li>数值类型:<br>  TINYINT: 1字节<br>  SMALLINT: 2字节<br>  MEDIUMINT: 3字节<br>  INT: 4字节<br>  BIGINT: 8字节</li>
+<li>时间类型<br>  DATE: 3字节<br>  TIMESTAMP: 4字节<br>  DATETIME: 8字节</li>
+<li>字段属性: NULL 属性 占用一个字节. 如果一个字段是 NOT NULL 的, 则没有此属性.</li>
+</ul>
+<p><strong>rows</strong><br>rows 也是一个重要的字段. MySQL 查询优化器根据统计信息, 估算 SQL 要查找到结果集需要扫描读取的数据行数.<br>这个值非常直观显示 SQL 的效率好坏, 原则上 rows 越少越好.</p>
+<p><strong>Extra</strong><br>EXplain 中的很多额外的信息会在 Extra 字段显示, 常见的有以下几种内容:</p>
+<ul>
+<li>Using filesort<br>当 Extra 中有 Using filesort 时, 表示 MySQL 需额外的排序操作, 不能通过索引顺序达到排序效果. 一般有 Using filesort, 都建议优化去掉, 因为这样的查询 CPU 资源消耗大.</li>
+<li>Using index<br>“覆盖索引扫描”, 表示查询在索引树中就可查找所需数据, 不用扫描表数据文件, 往往说明性能不错</li>
+<li>Using temporary<br>查询有使用临时表, 一般出现于排序, 分组和多表 join 的情况, 查询效率不高, 建议优化.</li>
+</ul>
+<p>下面尝添加explain来分析SQL语句<br>不加limit 5 分析（下图）：<br><img src="/assets/mysql/BC5B6725-30E7-443A-8C1D-18A0465268A0.png"><br>简要分析（主要针对table为a）：</p>
+<ol>
+<li>SIMPLE得出该SQL不包含UNION语句和子查询</li>
+<li>type=ref显示该SQL包含较多join查询</li>
+<li>可能用到的索引名称RYJobIDOne,RYJobIDTwo,RYJobIDThree,JobID,RStatus，但是实际只用到RStatus，RStatus为int型，为4字节，加上该字段可为NULL，再加1个字节，所以key_len=5字节</li>
+</ol>
+<p>加limit 5 分析（下图）：<br><img src="/assets/mysql/1CDF6121-0591-4E84-8982-257C9CF133D9.png"><br>简要分析（主要针对table为a）：</p>
+<ol>
+<li>与上述对比，差异主要在加了limit的语句实际使用的索引为RApplyDateTime。按上面的描述，datetime字段占用8字节，可为NULL再加1字节，还有2个字节去哪里死活查不到。也有可能是Mysql版本的愿原因，相同类型字段的占用字节数不同，此Mysql版本为5.5.52-MariaDB，这里可能datetime本身占用的是10字节。<br><img src="/assets/mysql/12CDFB9C49C6B68DA3F810FC365848ED.gif" width="25%"> </li>
+</ol>
+<p><strong><em>总结：索引乱加导致的后果，谨慎添加索引！！！</em></strong></p>
+<h3 id="索引使用优化"><a href="#索引使用优化" class="headerlink" title="索引使用优化"></a>索引使用优化</h3><h4 id="MySQL索引的类型"><a href="#MySQL索引的类型" class="headerlink" title="MySQL索引的类型"></a>MySQL索引的类型</h4><ol>
+<li>普通索引：这是最基本的索引，它没有任何限制，比如上文中为title字段创建的索引就是一个普通索引，MyIASM中默认的BTREE类型的索引，也是我们大多数情况下用到的索引。</li>
+<li>唯一索引：索引列的值必须唯一，但允许有空值（注意和主键不同）。如果是组合索引，则列值的组合必须唯一，创建方法和普通索引类似。</li>
+<li>全文索引（FULLTEXT）</li>
+<li>单列索引、多列索引：<strong><em>多个单列索引与单个多列索引的查询效果不同，因为执行查询时，MySQL只能使用一个索引，会从多个索引中选择一个限制最为严格的索引。</em></strong></li>
+<li>组合索引（最左前缀）：平时用的SQL查询语句一般都有比较多的限制条件，所以为了进一步榨取MySQL的效率，就要考虑建立组合索引。<br>例如上表中针对title和time建立一个组合索引：ALTER TABLE article ADD INDEX index_titme_time (title(50),time(10))。建立这样的组合索引，其实是相当于分别建立了下面两组组合索引：<br>– title,time<br>– title</li>
+</ol>
+<p>注意：最左匹配原则</p>
+<ul>
+<li>最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配</li>
+<li>=和in可以乱序<h4 id="MySQL索引的优化"><a href="#MySQL索引的优化" class="headerlink" title="MySQL索引的优化"></a>MySQL索引的优化</h4></li>
+</ul>
+<ol>
+<li>何时使用聚集索引或非聚集索引？</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>动作描述</th>
+<th style="text-align:center">使用聚集索引</th>
+<th style="text-align:center">使用非聚集索引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列经常被分组排序</td>
+<td style="text-align:center">使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+<tr>
+<td>返回某范围内的数据</td>
+<td style="text-align:center">使用</td>
+<td style="text-align:center">不使用</td>
+</tr>
+<tr>
+<td>一个或极少不同值</td>
+<td style="text-align:center">不使用</td>
+<td style="text-align:center">不使用</td>
+</tr>
+<tr>
+<td>小数目的不同值</td>
+<td style="text-align:center">使用</td>
+<td style="text-align:center">不使用</td>
+</tr>
+<tr>
+<td>大数目的不同值</td>
+<td style="text-align:center">不使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+<tr>
+<td>频繁更新的列</td>
+<td style="text-align:center">不使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+<tr>
+<td>外键列</td>
+<td style="text-align:center">使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+<tr>
+<td>主键列</td>
+<td style="text-align:center">使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+<tr>
+<td>频繁修改索引列</td>
+<td style="text-align:center">不使用</td>
+<td style="text-align:center">使用</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>索引不会包含有NULL值的列<br>只要列中包含有NULL值都将不会被包含在索引中，复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。所以我们在数据库设计时不要让字段的默认值为NULL。</li>
+<li>使用短索引<br>对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。</li>
+<li>索引列排序<br>MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。</li>
+<li>like语句操作<br>一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。</li>
+<li>不要在列上进行运算</li>
+</ol>
+<p><strong><em>总结：MySQL只对一下操作符才使用索引：&lt;,&lt;=,=,&gt;,&gt;=,between,in,以及某些时候的like(不以通配符%或_开头的情形)。而理论上每张表里面最多可创建16个索引，不过除非是数据量真的很多，否则过多的使用索引也不是那么好玩的。</em></strong><br>详细请仔细阅读<br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a><br>   <img src="/assets/mysql/85D652EBF843713865D57FFEC1CB1344.gif" width="25%"> </p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>我们回到开头的SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span> </span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span> </span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) ) </span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>先删除原表的所有索引.</li>
+<li>因为Mysql会选择并使用最优的一个索引（<strong><em>注意：仅使用一个</em></strong>），也就是根据explain的分析可得，key_len越大（不绝对，根绝NULL原则），rows越小，这样SQL的执行效率最高。且我们尽量把where语句中的=、in操作操作放前面，其余的放后面（根绝最左匹配原则）.</li>
+<li>将IsDelete、RStatus、JobID字段设置为不为NULL，其余的字段，可能为NULL，排除在外.</li>
+<li>建立联合索引，根据不为NULL原则，先尝试建立以下索引（RStatus、IsDelete、JobID），如下图：<br> <img src="/assets/mysql/A17AC5E6-D838-4856-8483-D0146D146D3F.png"></li>
+<li>使用explain分析，如下图：<br> <img src="/assets/mysql/AC3A2EEA-C772-47E1-8293-2A4ADCA7B155.png"><br> RStatus（int）4字节，IsDelete（int）4字节，JobID为varchar(50),50*4+2=202字节，总共4+4+202=210字节</li>
+<li>再次运行带有limit的SQL语句，执行效率如下图：<br> <img src="/assets/mysql/9DF2F74B-3C71-4C6E-A6CB-D4DDC340232D.png" width="50%"></li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>根据不同的SQL给表设置不同的索引，配合单列索引和所列索引，但是不要过多！</li>
+<li>多多使用explain来分析！！</li>
+<li>注意最左匹配原则！！！</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/09/Java8新特性总结/" rel="next" title="Java8新特性总结">
+                <i class="fa fa-chevron-left"></i> Java8新特性总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTU0Ny8xODA5NA=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/assets/img/panda.jpg" alt="Jim Liu">
+          <p class="site-author-name" itemprop="name">Jim Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/KejieLiu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pccpa.cn" title="天健会计师事务所" target="_blank">天健会计师事务所</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaopin.pccpa.cn" title="天健招聘" target="_blank">天健招聘</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题由来"><span class="nav-number">1.</span> <span class="nav-text">问题由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql-Explain分析"><span class="nav-number">2.</span> <span class="nav-text">Mysql Explain分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引使用优化"><span class="nav-number">3.</span> <span class="nav-text">索引使用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的类型"><span class="nav-number">3.1.</span> <span class="nav-text">MySQL索引的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的优化"><span class="nav-number">3.2.</span> <span class="nav-text">MySQL索引的优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">4.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jim Liu</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
