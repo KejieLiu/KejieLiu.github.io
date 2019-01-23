@@ -282,6 +282,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kejieliu.github.io/2019/01/23/VSCode使用记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jim Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/img/panda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雨中過客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/VSCode使用记录/" itemprop="url">VSCode使用记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T19:05:33+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/VSCode/" itemprop="url" rel="index">
+                    <span itemprop="name">VSCode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="快捷键记录"><a href="#快捷键记录" class="headerlink" title="快捷键记录"></a>快捷键记录</h1><p>⌘ Command<br>⇧ Shift<br>⌥ Option<br>⌃ Control</p>
+<h2 id="命令面板-⌘-⇧-P"><a href="#命令面板-⌘-⇧-P" class="headerlink" title="命令面板 ⌘+⇧+P"></a>命令面板 ⌘+⇧+P</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/23/VSCode使用记录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kejieliu.github.io/2019/01/14/Mysql索引问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -374,7 +521,8 @@
 
       
         
-          <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span> </span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span> </span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) ) </span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+          <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/14/Mysql索引问题/#more" rel="contents">
@@ -1483,7 +1631,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1494,7 +1642,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1505,7 +1653,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

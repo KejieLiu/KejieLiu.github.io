@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta name="description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
 <meta name="keywords" content="Mysql,数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引问题">
 <meta property="og:url" content="https://kejieliu.github.io/2019/01/14/Mysql索引问题/index.html">
 <meta property="og:site_name" content="雨中過客">
-<meta property="og:description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta property="og:description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/A17AC5E6-D838-4856-8483-D0146D146D3F.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/AC3A2EEA-C772-47E1-8293-2A4ADCA7B155.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/9DF2F74B-3C71-4C6E-A6CB-D4DDC340232D.png">
-<meta property="og:updated_time" content="2019-01-15T05:19:50.597Z">
+<meta property="og:updated_time" content="2019-01-23T11:03:48.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引问题">
-<meta name="twitter:description" content="问题由来SQL经过简化12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere a">
+<meta name="twitter:description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
 <meta name="twitter:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
 
 
@@ -392,7 +392,8 @@
       
 
       
-        <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span> </span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span> </span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) ) </span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+        <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>添加索引情况如下：<br>索引情况较乱<br><img src="/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png" width="75%"><br>在查询一句Sql时，发现加limit与不加limit差异巨大<br>不加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png" width="35%"><br>需要1.77秒<br>加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/F5FFD2CE-5CFA-4169-80B1-C7B1BC315FF0.png" width="35%"><br>需要15.00秒</p>
 <h3 id="Mysql-Explain分析"><a href="#Mysql-Explain分析" class="headerlink" title="Mysql Explain分析"></a>Mysql Explain分析</h3><p>我们使用Mysql的Explanin来分析SQL语句，先来看下Explain的使用<br>点击学习<a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br>Explain输出格式<br><strong>select_type</strong></p>
@@ -414,7 +415,8 @@
 <li>ref：此类型通常出现在多表的 join 查询, 针对于非唯一或非主键索引, 或者是使用了 最左前缀 规则索引的查询. </li>
 <li>range：表示使用索引范围查询, 通过索引字段范围获取表中部分数据记录. 这个类型通常出现在 =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, IS NULL, &lt;=&gt;, BETWEEN, IN() 操作中.</li>
 <li>index：表示全索引扫描(full index scan), 和 ALL 类型类似, 只不过 ALL 类型是全表扫描, 而 index 类型则仅仅扫描所有的索引, 而不扫描数据.</li>
-<li>ALL：表示全表扫描, 这个类型的查询是性能最差的查询之一.<br>性能比较：<br><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></li>
+<li>ALL：表示全表扫描, 这个类型的查询是性能最差的查询之一.</li>
+<li>性能比较：<br><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></li>
 </ol>
 <p><strong>possible_keys</strong><br>表示 MySQL 在查询时, 能够使用到的索引. 注意, 即使有些索引在 possible_keys 中出现, 但是并不表示此索引会真正地被 MySQL 使用到. MySQL 在查询时具体使用了哪些索引, 由 key 字段决定.</p>
 <p><strong>key</strong><br>此字段是 MySQL 在当前查询时所真正使用到的索引.</p>
@@ -432,16 +434,18 @@
 <li>Using index<br>“覆盖索引扫描”, 表示查询在索引树中就可查找所需数据, 不用扫描表数据文件, 往往说明性能不错</li>
 <li>Using temporary<br>查询有使用临时表, 一般出现于排序, 分组和多表 join 的情况, 查询效率不高, 建议优化.</li>
 </ul>
-<p>下面尝添加explain来分析SQL语句<br>不加limit 5 分析（下图）：<br><img src="/assets/mysql/BC5B6725-30E7-443A-8C1D-18A0465268A0.png"><br>简要分析（主要针对table为a）：</p>
+<p>下面尝试添加explain来分析SQL语句<br>不加limit 5 分析（下图）：</p>
+<p><img src="/assets/mysql/BC5B6725-30E7-443A-8C1D-18A0465268A0.png"><br>简要分析（主要针对table为a）：</p>
 <ol>
-<li>SIMPLE得出该SQL不包含UNION语句和子查询</li>
+<li>SIMPLE 得出该SQL不包含UNION语句和子查询</li>
 <li>type=ref显示该SQL包含较多join查询</li>
 <li>可能用到的索引名称RYJobIDOne,RYJobIDTwo,RYJobIDThree,JobID,RStatus，但是实际只用到RStatus，RStatus为int型，为4字节，加上该字段可为NULL，再加1个字节，所以key_len=5字节</li>
 </ol>
 <p>加limit 5 分析（下图）：<br><img src="/assets/mysql/1CDF6121-0591-4E84-8982-257C9CF133D9.png"><br>简要分析（主要针对table为a）：</p>
 <ol>
-<li>与上述对比，差异主要在加了limit的语句实际使用的索引为RApplyDateTime。按上面的描述，datetime字段占用8字节，可为NULL再加1字节，还有2个字节去哪里死活查不到。也有可能是Mysql版本的愿原因，相同类型字段的占用字节数不同，此Mysql版本为5.5.52-MariaDB，这里可能datetime本身占用的是10字节。<br><img src="/assets/mysql/12CDFB9C49C6B68DA3F810FC365848ED.gif" width="25%"> </li>
+<li>与上述对比，差异主要在加了limit的语句实际使用的索引为RApplyDateTime。按上面的描述，datetime字段占用8字节，可为NULL再加1字节，还有2个字节去哪里死活查不到。也有可能是Mysql版本的愿原因，相同类型字段的占用字节数不同，此Mysql版本为5.5.52-MariaDB，这里可能datetime本身占用的是10字节。</li>
 </ol>
+<p><img src="/assets/mysql/12CDFB9C49C6B68DA3F810FC365848ED.gif" width="25%"> </p>
 <p><strong><em>总结：索引乱加导致的后果，谨慎添加索引！！！</em></strong></p>
 <h3 id="索引使用优化"><a href="#索引使用优化" class="headerlink" title="索引使用优化"></a>索引使用优化</h3><h4 id="MySQL索引的类型"><a href="#MySQL索引的类型" class="headerlink" title="MySQL索引的类型"></a>MySQL索引的类型</h4><ol>
 <li>普通索引：这是最基本的索引，它没有任何限制，比如上文中为title字段创建的索引就是一个普通索引，MyIASM中默认的BTREE类型的索引，也是我们大多数情况下用到的索引。</li>
@@ -458,9 +462,9 @@
 <p>注意：最左匹配原则</p>
 <ul>
 <li>最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配</li>
-<li>=和in可以乱序<h4 id="MySQL索引的优化"><a href="#MySQL索引的优化" class="headerlink" title="MySQL索引的优化"></a>MySQL索引的优化</h4></li>
+<li>=和in可以乱序</li>
 </ul>
-<ol>
+<h4 id="MySQL索引的优化"><a href="#MySQL索引的优化" class="headerlink" title="MySQL索引的优化"></a>MySQL索引的优化</h4><ol>
 <li>何时使用聚集索引或非聚集索引？</li>
 </ol>
 <table>
@@ -525,13 +529,14 @@
 <li>like语句操作<br>一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。</li>
 <li>不要在列上进行运算</li>
 <li><p>存在and和or的组合时，Mysql会对SQL进行拆分，所以建立多个单或组合索引<br>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.*    </span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> (a.RCheckEIDOne = <span class="string">'11'</span></span><br><span class="line"><span class="keyword">or</span> a.RCheckEIDTwo = <span class="string">'22'</span></span><br><span class="line"><span class="keyword">or</span> a.RCheckEIDThree = <span class="string">'33'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.*</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> (a.RCheckEIDOne = <span class="string">'11'</span></span><br><span class="line"><span class="keyword">or</span> a.RCheckEIDTwo = <span class="string">'22'</span></span><br><span class="line"><span class="keyword">or</span> a.RCheckEIDThree = <span class="string">'33'</span>)</span><br></pre></td></tr></table></figure>
 <p> 需要建立三个索引，如下图：<br> <img src="/assets/mysql/5FE5B230-F17D-4B81-8E02-E4EB613F52F2.png"><br> 使用explain分析可得下图：<br> <img src="/assets/mysql/CCEF515D-8AAC-4800-8F76-D6FA53128098.png" width="50%"><br> Mysql使用了3个索引来加快查询速度，Using union*3</p>
 </li>
 <li>NULL索引问题：<br>要尽可能地把字段定义为 NOT NULL，即使应用程序无须保存 NULL（没有值），也有许多表包含了可空列（Nullable Column）这仅仅是因为它为默认选项。除非真的要保存 NULL，否则就把列定义为 NOT NULL。<br>MySQL难以优化引用了可空列的查询,它会使索引、索引统计和值更加复杂。可空列需要更多的储存空间，还需要在MySQL内部进行特殊处理。当可空列被索引的时候，每条记录都需要一个额外的字节，还可能导致 MyISAM 中固定大小的索引(例如一个整数列上的索引)变成可变大小的索引。 即使要在表中储存「没有值」的字段，还是有可能不使用 NULL 的，考虑使用 0、特殊值或空字符串来代替它。 把 NULL 列改为 NOT NULL 带来的性能提升很小，所以除非确定它引入了问题，否则就不要把它当作优先的优化措施。然后，如果计划对列进行索引，就要尽量避免把它设置为可空,虽然在mysql里 Null值的列也是走索引的</li>
 </ol>
 <p><strong><em>总结：MySQL只对以下操作符才使用索引：&lt;,&lt;=,=,&gt;,&gt;=,between,in,以及某些时候的like(不以通配符%或_开头的情形)。而理论上每张表里面最多可创建16个索引，不过除非是数据量真的很多，否则过多的使用索引也不是那么好玩的。</em></strong><br>详细请仔细阅读<br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a><br>   <img src="/assets/mysql/85D652EBF843713865D57FFEC1CB1344.gif" width="25%"> </p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>我们回到开头的SQL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span> </span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span> </span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span> </span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>) </span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) ) </span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>我们回到开头的SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 <ol>
 <li>先删除原表的所有索引.</li>
 <li>因为Mysql会选择并使用最优的一个索引（<strong><em>注意：仅使用一个，排除存在or</em></strong>），也就是根据explain的分析可得，key_len越大（不绝对，可以为NULL，会加1个字节），rows越小，这样SQL的执行效率最高。且我们尽量把where语句中的=、in操作操作放前面，其余的放后面（根绝最左匹配原则）.</li>
@@ -587,6 +592,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/VSCode使用记录/" rel="prev" title="VSCode使用记录">
+                VSCode使用记录 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -686,7 +695,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -697,7 +706,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -708,7 +717,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
