@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="雨中過客">
 <meta property="og:description" content="主要总结哪些地方可以用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-23T11:53:16.890Z">
+<meta property="og:updated_time" content="2019-01-24T02:19:41.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8新特性总结">
 <meta name="twitter:description" content="主要总结哪些地方可以用">
@@ -408,7 +408,40 @@
 <p>当然如果接口中的默认方法不能满足某个实现类需要，那么实现类可以覆盖默认方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherJDK8InterfaceImpl</span> <span class="keyword">implements</span> <span class="title">JDK8Interface</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 签名跟接口default方法一致,但是不能再加default修饰符</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">defaultMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"接口实现类覆盖了接口中的default"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于java支持一个实现类可以实现多个接口，如果多个接口中存在同样的static和default方法会怎么样呢？如果有两个接口中的静态方法一模一样，并且一个实现类同时实现了这两个接口，此时并不会产生错误，因为jdk8只能通过接口类调用接口中的静态方法，所以对编译器来说是可以区分的。但是如果两个接口中定义了一模一样的默认方法，并且一个实现类同时实现了这两个接口，那么必须在实现类中重写默认方法，否则编译失败。</p>
-<p>参考<br><a href="http://www.importnew.com/16436.html" target="_blank" rel="noopener">Java8 lambda表达式10个示例</a><br><a href="https://blog.csdn.net/aitangyong/article/details/54134385" target="_blank" rel="noopener">JDK8新特性：接口的静态方法和默认方法</a></p>
+<h1 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h1><p> 方法引用是用来直接访问类或者实例的已经存在的方法或者构造方法<br> 方法引用的标准形式是：<strong>类名::方法名</strong>。（注意：只需要写方法名，不需要写括号）</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>引用静态方法</td>
+<td style="text-align:left">ContainingClass::staticMethodName</td>
+</tr>
+<tr>
+<td>引用某个对象的实例方法</td>
+<td style="text-align:left">containingObject::instanceMethodName</td>
+</tr>
+<tr>
+<td>引用某个类型的任意对象的实例方法</td>
+<td style="text-align:left">ContainingType::methodName</td>
+</tr>
+<tr>
+<td>引用构造方法</td>
+<td style="text-align:left">ClassName::new</td>
+</tr>
+</tbody>
+</table>
+<h2 id="静态方法引用"><a href="#静态方法引用" class="headerlink" title="静态方法引用"></a>静态方法引用</h2><p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　String::valueOf   等价于lambda表达式 (s) -&gt; String.valueOf(s)</span><br><span class="line">　　Math::pow       等价于lambda表达式  (x, y) -&gt; Math.pow(x, y);</span><br></pre></td></tr></table></figure>
+<h2 id="特定实例对象的方法引用"><a href="#特定实例对象的方法引用" class="headerlink" title="特定实例对象的方法引用"></a>特定实例对象的方法引用</h2><h2 id="任意对象（属于同一个类）的实例方法引用"><a href="#任意对象（属于同一个类）的实例方法引用" class="headerlink" title="任意对象（属于同一个类）的实例方法引用"></a>任意对象（属于同一个类）的实例方法引用</h2><p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] stringArray = &#123; <span class="string">"Barbara"</span>, <span class="string">"James"</span>, <span class="string">"Mary"</span>, <span class="string">"John"</span>, <span class="string">"Patricia"</span>, <span class="string">"Robert"</span>, <span class="string">"Michael"</span>, <span class="string">"Linda"</span> &#125;;</span><br><span class="line">Arrays.sort(stringArray, String::compareToIgnoreCase);</span><br></pre></td></tr></table></figure>
+<h2 id="构造方法引用"><a href="#构造方法引用" class="headerlink" title="构造方法引用"></a>构造方法引用</h2><p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String::<span class="keyword">new</span>， 等价于lambda表达式 () -&gt; <span class="keyword">new</span> String()</span><br></pre></td></tr></table></figure>
+<p>参考<br><a href="http://www.importnew.com/16436.html" target="_blank" rel="noopener">Java8 lambda表达式10个示例</a><br><a href="https://blog.csdn.net/aitangyong/article/details/54134385" target="_blank" rel="noopener">JDK8新特性：接口的静态方法和默认方法</a><br><a href="https://www.cnblogs.com/xiaoxi/p/7099667.html" target="_blank" rel="noopener">Java8之方法引用</a></p>
 
       
     </div>
@@ -646,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda表达式"><span class="nav-number">1.</span> <span class="nav-text">lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用lambda表达式实现Runnable"><span class="nav-number">1.1.</span> <span class="nav-text">用lambda表达式实现Runnable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Java-8-lambda表达式进行事件处理"><span class="nav-number">1.2.</span> <span class="nav-text">使用Java 8 lambda表达式进行事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lambda表达式对列表进行迭代"><span class="nav-number">1.3.</span> <span class="nav-text">使用lambda表达式对列表进行迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lambda表达式和函数式接口Predicate"><span class="nav-number">1.4.</span> <span class="nav-text">使用lambda表达式和函数式接口Predicate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在lambda表达式中加入Predicate"><span class="nav-number">1.5.</span> <span class="nav-text">如何在lambda表达式中加入Predicate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8中使用lambda表达式的Map和Reduce示例"><span class="nav-number">1.6.</span> <span class="nav-text">Java 8中使用lambda表达式的Map和Reduce示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过过滤创建一个String列表"><span class="nav-number">1.7.</span> <span class="nav-text">通过过滤创建一个String列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对列表的每个元素应用函数"><span class="nav-number">1.8.</span> <span class="nav-text">对列表的每个元素应用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制不同的值，创建一个子列表"><span class="nav-number">1.9.</span> <span class="nav-text">复制不同的值，创建一个子列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算集合元素的最大值、最小值、总和以及平均值"><span class="nav-number">1.10.</span> <span class="nav-text">计算集合元素的最大值、最小值、总和以及平均值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口的默认方法与静态方法"><span class="nav-number">2.</span> <span class="nav-text">接口的默认方法与静态方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda表达式"><span class="nav-number">1.</span> <span class="nav-text">lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用lambda表达式实现Runnable"><span class="nav-number">1.1.</span> <span class="nav-text">用lambda表达式实现Runnable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Java-8-lambda表达式进行事件处理"><span class="nav-number">1.2.</span> <span class="nav-text">使用Java 8 lambda表达式进行事件处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lambda表达式对列表进行迭代"><span class="nav-number">1.3.</span> <span class="nav-text">使用lambda表达式对列表进行迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lambda表达式和函数式接口Predicate"><span class="nav-number">1.4.</span> <span class="nav-text">使用lambda表达式和函数式接口Predicate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在lambda表达式中加入Predicate"><span class="nav-number">1.5.</span> <span class="nav-text">如何在lambda表达式中加入Predicate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8中使用lambda表达式的Map和Reduce示例"><span class="nav-number">1.6.</span> <span class="nav-text">Java 8中使用lambda表达式的Map和Reduce示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过过滤创建一个String列表"><span class="nav-number">1.7.</span> <span class="nav-text">通过过滤创建一个String列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对列表的每个元素应用函数"><span class="nav-number">1.8.</span> <span class="nav-text">对列表的每个元素应用函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制不同的值，创建一个子列表"><span class="nav-number">1.9.</span> <span class="nav-text">复制不同的值，创建一个子列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算集合元素的最大值、最小值、总和以及平均值"><span class="nav-number">1.10.</span> <span class="nav-text">计算集合元素的最大值、最小值、总和以及平均值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口的默认方法与静态方法"><span class="nav-number">2.</span> <span class="nav-text">接口的默认方法与静态方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法引用"><span class="nav-number">3.</span> <span class="nav-text">方法引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态方法引用"><span class="nav-number">3.1.</span> <span class="nav-text">静态方法引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特定实例对象的方法引用"><span class="nav-number">3.2.</span> <span class="nav-text">特定实例对象的方法引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任意对象（属于同一个类）的实例方法引用"><span class="nav-number">3.3.</span> <span class="nav-text">任意对象（属于同一个类）的实例方法引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法引用"><span class="nav-number">3.4.</span> <span class="nav-text">构造方法引用</span></a></li></ol></li></ol></div>
             
 
           </div>
