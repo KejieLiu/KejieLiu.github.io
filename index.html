@@ -190,7 +190,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">心情不好就不想说话</p>
+        <p class="site-subtitle">前端React && 后台Java 开发</p>
       
   </div>
 
@@ -521,7 +521,7 @@
 
       
         
-          <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化</p>
+          <h1 id="一、问题由来"><a href="#一、问题由来" class="headerlink" title="一、问题由来"></a>一、问题由来</h1><p>SQL经过简化</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1108,7 +1108,8 @@
       
         
           <p>以下根据后台项目合并请求!165进行记录：</p>
-<h2 id="一、序列化操作"><a href="#一、序列化操作" class="headerlink" title="一、序列化操作"></a>一、序列化操作</h2><p>ObjectMapper为jackson库中自带<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">List&lt;TableTitleIndex&gt; tableTitleIndices = objectMapper.readValue(tableRowName, <span class="keyword">new</span> TypeReference&lt;List&lt;TableTitleIndex&gt;&gt;() &#123;&#125;);</span><br><span class="line">ListPageParam listPageParam = objectMapper.readValue(param, ListPageParam.class);</span><br></pre></td></tr></table></figure></p>
+<h1 id="一、序列化操作"><a href="#一、序列化操作" class="headerlink" title="一、序列化操作"></a>一、序列化操作</h1><p>ObjectMapper为jackson库中自带</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">List&lt;TableTitleIndex&gt; tableTitleIndices = objectMapper.readValue(tableRowName, <span class="keyword">new</span> TypeReference&lt;List&lt;TableTitleIndex&gt;&gt;() &#123;&#125;);</span><br><span class="line">ListPageParam listPageParam = objectMapper.readValue(param, ListPageParam.class);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/27/JavaLearing/#more" rel="contents">
@@ -1254,7 +1255,7 @@
 
       
         
-          <h2 id="一、GitHub准备"><a href="#一、GitHub准备" class="headerlink" title="一、GitHub准备"></a>一、GitHub准备</h2><p>1、参照<a href="https://pages.github.com" target="_blank" rel="noopener">https://pages.github.com</a> 新建仓库并设置，并测试username.github.io （username为注册名）能够正常访问。<br>
+          <h1 id="一、GitHub准备"><a href="#一、GitHub准备" class="headerlink" title="一、GitHub准备"></a>一、GitHub准备</h1><p>1、参照<a href="https://pages.github.com" target="_blank" rel="noopener">https://pages.github.com</a> 新建仓库并设置，并测试username.github.io （username为注册名）能够正常访问。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/06/Github-Pages-and-Hexo/#more" rel="contents">

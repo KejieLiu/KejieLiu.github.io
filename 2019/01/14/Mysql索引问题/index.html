@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
+<meta name="description" content="一、问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwher">
 <meta name="keywords" content="Mysql,数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql索引问题">
 <meta property="og:url" content="https://kejieliu.github.io/2019/01/14/Mysql索引问题/index.html">
 <meta property="og:site_name" content="雨中過客">
-<meta property="og:description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
+<meta property="og:description" content="一、问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwher">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/A17AC5E6-D838-4856-8483-D0146D146D3F.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/AC3A2EEA-C772-47E1-8293-2A4ADCA7B155.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/mysql/9DF2F74B-3C71-4C6E-A6CB-D4DDC340232D.png">
-<meta property="og:updated_time" content="2019-01-23T11:03:48.937Z">
+<meta property="og:updated_time" content="2019-01-24T11:41:49.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql索引问题">
-<meta name="twitter:description" content="问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwhere">
+<meta name="twitter:description" content="一、问题由来SQL经过简化 12345678910111213141516select *from aleft join b on a.RCheckEIDOne = b.EIDleft join c on a.RCheckEIDTwo = c.EIDleft join d on a.RCheckEIDThree = d.EIDleft join e on a.JobId = e.JobIDwher">
 <meta name="twitter:image" content="https://kejieliu.github.io/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png">
 
 
@@ -206,7 +206,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">心情不好就不想说话</p>
+        <p class="site-subtitle">前端React && 后台Java 开发</p>
       
   </div>
 
@@ -392,11 +392,11 @@
       
 
       
-        <h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>SQL经过简化</p>
+        <h1 id="一、问题由来"><a href="#一、问题由来" class="headerlink" title="一、问题由来"></a>一、问题由来</h1><p>SQL经过简化</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>添加索引情况如下：<br>索引情况较乱<br><img src="/assets/mysql/41801B84-D98C-4E24-BA3F-B9AEC92A3D4F.png" width="75%"><br>在查询一句Sql时，发现加limit与不加limit差异巨大<br>不加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/3614689F-E2B2-4C7C-95F2-B3FA99E7BA15.png" width="35%"><br>需要1.77秒<br>加limit 5 查询时间如下（下图）：<br><img src="/assets/mysql/F5FFD2CE-5CFA-4169-80B1-C7B1BC315FF0.png" width="35%"><br>需要15.00秒</p>
-<h3 id="Mysql-Explain分析"><a href="#Mysql-Explain分析" class="headerlink" title="Mysql Explain分析"></a>Mysql Explain分析</h3><p>我们使用Mysql的Explanin来分析SQL语句，先来看下Explain的使用<br>点击学习<a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br>Explain输出格式<br><strong>select_type</strong></p>
+<h1 id="二、Mysql-Explain分析"><a href="#二、Mysql-Explain分析" class="headerlink" title="二、Mysql Explain分析"></a>二、Mysql Explain分析</h1><p>我们使用Mysql的Explanin来分析SQL语句，先来看下Explain的使用<br>点击学习<a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br>Explain输出格式<br><strong>select_type</strong></p>
 <ol>
 <li><strong>SIMPLE, 表示此查询不包含 UNION 查询或子查询</strong></li>
 <li>PRIMARY, 表示此查询是最外层的查询</li>
@@ -416,8 +416,8 @@
 <li>range：表示使用索引范围查询, 通过索引字段范围获取表中部分数据记录. 这个类型通常出现在 =, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, IS NULL, &lt;=&gt;, BETWEEN, IN() 操作中.</li>
 <li>index：表示全索引扫描(full index scan), 和 ALL 类型类似, 只不过 ALL 类型是全表扫描, 而 index 类型则仅仅扫描所有的索引, 而不扫描数据.</li>
 <li>ALL：表示全表扫描, 这个类型的查询是性能最差的查询之一.</li>
-<li>性能比较：<br><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></li>
 </ol>
+<p>性能比较：<br><strong>ALL &lt; index &lt; range ~ index_merge &lt; ref &lt; eq_ref &lt; const &lt; system</strong></p>
 <p><strong>possible_keys</strong><br>表示 MySQL 在查询时, 能够使用到的索引. 注意, 即使有些索引在 possible_keys 中出现, 但是并不表示此索引会真正地被 MySQL 使用到. MySQL 在查询时具体使用了哪些索引, 由 key 字段决定.</p>
 <p><strong>key</strong><br>此字段是 MySQL 在当前查询时所真正使用到的索引.</p>
 <p><strong>key_len</strong><br>表示查询优化器使用了索引的字节数. 这个字段可以评估组合索引是否完全被使用, 或只有最左部分字段被使用到.</p>
@@ -447,7 +447,7 @@
 </ol>
 <p><img src="/assets/mysql/12CDFB9C49C6B68DA3F810FC365848ED.gif" width="25%"> </p>
 <p><strong><em>总结：索引乱加导致的后果，谨慎添加索引！！！</em></strong></p>
-<h3 id="索引使用优化"><a href="#索引使用优化" class="headerlink" title="索引使用优化"></a>索引使用优化</h3><h4 id="MySQL索引的类型"><a href="#MySQL索引的类型" class="headerlink" title="MySQL索引的类型"></a>MySQL索引的类型</h4><ol>
+<h1 id="三、索引使用优化"><a href="#三、索引使用优化" class="headerlink" title="三、索引使用优化"></a>三、索引使用优化</h1><h4 id="MySQL索引的类型"><a href="#MySQL索引的类型" class="headerlink" title="MySQL索引的类型"></a>MySQL索引的类型</h4><ol>
 <li>普通索引：这是最基本的索引，它没有任何限制，比如上文中为title字段创建的索引就是一个普通索引，MyIASM中默认的BTREE类型的索引，也是我们大多数情况下用到的索引。</li>
 <li>唯一索引：索引列的值必须唯一，但允许有空值（注意和主键不同）。如果是组合索引，则列值的组合必须唯一，创建方法和普通索引类似。</li>
 <li>全文索引（FULLTEXT）</li>
@@ -535,7 +535,7 @@
 <li>NULL索引问题：<br>要尽可能地把字段定义为 NOT NULL，即使应用程序无须保存 NULL（没有值），也有许多表包含了可空列（Nullable Column）这仅仅是因为它为默认选项。除非真的要保存 NULL，否则就把列定义为 NOT NULL。<br>MySQL难以优化引用了可空列的查询,它会使索引、索引统计和值更加复杂。可空列需要更多的储存空间，还需要在MySQL内部进行特殊处理。当可空列被索引的时候，每条记录都需要一个额外的字节，还可能导致 MyISAM 中固定大小的索引(例如一个整数列上的索引)变成可变大小的索引。 即使要在表中储存「没有值」的字段，还是有可能不使用 NULL 的，考虑使用 0、特殊值或空字符串来代替它。 把 NULL 列改为 NOT NULL 带来的性能提升很小，所以除非确定它引入了问题，否则就不要把它当作优先的优化措施。然后，如果计划对列进行索引，就要尽量避免把它设置为可空,虽然在mysql里 Null值的列也是走索引的</li>
 </ol>
 <p><strong><em>总结：MySQL只对以下操作符才使用索引：&lt;,&lt;=,=,&gt;,&gt;=,between,in,以及某些时候的like(不以通配符%或_开头的情形)。而理论上每张表里面最多可创建16个索引，不过除非是数据量真的很多，否则过多的使用索引也不是那么好玩的。</em></strong><br>详细请仔细阅读<br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a><br>   <img src="/assets/mysql/85D652EBF843713865D57FFEC1CB1344.gif" width="25%"> </p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>我们回到开头的SQL</p>
+<h1 id="四、解决问题"><a href="#四、解决问题" class="headerlink" title="四、解决问题"></a>四、解决问题</h1><p>我们回到开头的SQL</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> b <span class="keyword">on</span> a.RCheckEIDOne = b.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> c <span class="keyword">on</span> a.RCheckEIDTwo = c.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> d <span class="keyword">on</span> a.RCheckEIDThree = d.EID</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> e <span class="keyword">on</span> a.JobId = e.JobID</span><br><span class="line"><span class="keyword">where</span> a.IsDelete = <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> a.RStatus = <span class="number">3</span></span><br><span class="line"><span class="keyword">and</span> a.RIID <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> a.RGuidangYear <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">and</span> ( (a.JobID = RYJobIDOne <span class="keyword">and</span> RYJobSystemIDOne=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDTwo <span class="keyword">and</span> RYJobSystemIDTwo=<span class="string">'10'</span>)</span><br><span class="line">    <span class="keyword">or</span> (a.JobID = RYJobIDThree <span class="keyword">and</span> RYJobSystemIDThree=<span class="string">'10'</span>) )</span><br><span class="line"><span class="keyword">and</span> e.DepartID <span class="keyword">in</span> ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> a.RApplyDateTime</span><br><span class="line"><span class="keyword">limit</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 <ol>
 <li>先删除原表的所有索引.</li>
@@ -545,12 +545,12 @@
 <li>使用explain分析，如下图：<br> <img src="/assets/mysql/AC3A2EEA-C772-47E1-8293-2A4ADCA7B155.png"><br> RStatus（int）4字节，IsDelete（int）4字节，JobID为varchar(50),50*4+2=202字节，总共4+4+202=210字节</li>
 <li>再次运行带有limit的SQL语句，执行效率如下图：<br> <img src="/assets/mysql/9DF2F74B-3C71-4C6E-A6CB-D4DDC340232D.png" width="50%"></li>
 </ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<h1 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h1><ol>
 <li>根据不同的SQL给表设置不同的索引，配合单列索引和所列索引，但是不要过多！</li>
 <li>多多使用explain来分析！！</li>
 <li>注意最左匹配原则！！！</li>
 </ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a></p>
+<h1 id="六、参考"><a href="#六、参考" class="headerlink" title="六、参考"></a>六、参考</h1><p><a href="https://segmentfault.com/a/1190000008131735?utm_source=tag-newest" target="_blank" rel="noopener">MySQL 性能优化神器 Explain 使用分析</a><br><a href="https://www.cnblogs.com/doudouxiaoye/p/5831449.html" target="_blank" rel="noopener">mysql索引的使用和优化</a></p>
 
       
     </div>
@@ -790,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题由来"><span class="nav-number">1.</span> <span class="nav-text">问题由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql-Explain分析"><span class="nav-number">2.</span> <span class="nav-text">Mysql Explain分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引使用优化"><span class="nav-number">3.</span> <span class="nav-text">索引使用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的类型"><span class="nav-number">3.1.</span> <span class="nav-text">MySQL索引的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的优化"><span class="nav-number">3.2.</span> <span class="nav-text">MySQL索引的优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">4.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、问题由来"><span class="nav-text">一、问题由来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Mysql-Explain分析"><span class="nav-text">二、Mysql Explain分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、索引使用优化"><span class="nav-text">三、索引使用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的类型"><span class="nav-text">MySQL索引的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL索引的优化"><span class="nav-text">MySQL索引的优化</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#四、解决问题"><span class="nav-text">四、解决问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、总结"><span class="nav-text">五、总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、参考"><span class="nav-text">六、参考</span></a></li></div>
             
 
           </div>
