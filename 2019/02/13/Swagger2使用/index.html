@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://kejieliu.github.io/assets/spring/swagger2.png">
 <meta property="og:image" content="https://kejieliu.github.io/assets/spring/swagger2new.png">
-<meta property="og:updated_time" content="2019-02-13T12:11:22.636Z">
+<meta property="og:updated_time" content="2019-03-03T09:46:24.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swagger2使用">
 <meta name="twitter:description" content="一、介绍Swagger2提供了在线文档的查阅和测试功能。利用Swagger2很容易构建阻STful风格的API，在SpringBoot中集成Swagger2。">
@@ -395,17 +395,22 @@
 <p>人性化界面</p>
 <p><img src="/assets/spring/swagger2new.png" alt="第三方优化界面"></p>
 <h1 id="三、Restful接口配置"><a href="#三、Restful接口配置" class="headerlink" title="三、Restful接口配置"></a>三、Restful接口配置</h1><h2 id="1、常用注解"><a href="#1、常用注解" class="headerlink" title="1、常用注解"></a>1、常用注解</h2><ul>
-<li>@Api:Marks a class as a Swagger resource.</li>
-<li>@ApiModel:Provides additional information about Swagger models.</li>
-<li>@ApiModelProperty:Adds and manipulates data of a model property.</li>
-<li>@ApiOperation:Describes an operation or typically a HTTP method against a specific path.</li>
-<li>@ApiParam:Adds additional meta-data for operation parameters.</li>
+<li>@Api<br>Marks a class as a Swagger resource.</li>
+<li>@ApiModel<br>Provides additional information about Swagger models.</li>
+<li>@ApiModelProperty<br>Adds and manipulates data of a model property.</li>
+<li>@ApiOperation<br>Describes an operation or typically a HTTP method against a specific path.</li>
+<li>@ApiParam<br>Adds additional meta-data for operation parameters.</li>
+<li>@ApiImplicitParam<br>Represents a single parameter in an API Operation.</li>
+<li>@ApiImplicitParam<br>A wrapper to allow a list of multiple ApiImplicitParam objects.<br>具体请打开<a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X#api" target="_blank" rel="noopener">Quick Annotation Overview</a>有详细说明</li>
 </ul>
-<p>具体请打开<a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X#api" target="_blank" rel="noopener">Quick Annotation Overview</a>有详细说明</p>
 <h2 id="2、API地址"><a href="#2、API地址" class="headerlink" title="2、API地址"></a>2、API地址</h2><p>官方地址<code>http://${host}:${port}/swagger-ui.html</code></p>
 <p>新UI地址<code>http://${host}:${port}/docs.html</code>（推荐）</p>
 <h1 id="四、实例"><a href="#四、实例" class="headerlink" title="四、实例"></a>四、实例</h1><h2 id="1、Controller层"><a href="#1、Controller层" class="headerlink" title="1、Controller层"></a>1、Controller层</h2><p>需要对controller加上@Api注解，各方法添加@ApiOperation注解，方法的参数添加@ApiParam注解，具体对应请看下面例子</p>
+<p><strong>注意</strong></p>
+<p><font color="red"><strong>@ApiImplicitParam注解遇到@RequestBody将不起效，作者已经注意到此bug，预计将在3版本后修复，请将遇到的model还是依旧进行注解标示<br>使用@ApiParam注解无bug</strong></font><br></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api</span>(value=<span class="string">"hr.recruit"</span>, tags=<span class="string">"人力招聘简历接口"</span>)</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/api/pc/recruit/resume"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResumeController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(value=<span class="string">"获取简历表信息"</span>, notes = <span class="string">"简历表信息"</span>)</span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/list/tableData/&#123;menuId&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> PageSuit <span class="title">getPostList</span><span class="params">(@ApiParam(name=<span class="string">"menuId"</span>,value=<span class="string">"菜单Id"</span>,required=<span class="keyword">true</span>)</span> @<span class="title">PathVariable</span><span class="params">(<span class="string">"menuId"</span>)</span> String menuId,</span></span><br><span class="line"><span class="function">                                @<span class="title">ApiParam</span><span class="params">(name=<span class="string">"pageParam"</span>,value=<span class="string">"高级搜索参数"</span>,required=<span class="keyword">true</span>)</span> @RequestBody ListPageParam&lt;ResumeSelection&gt; pageParam) <span class="keyword">throws</span> IllegalAccessException </span>&#123;</span><br><span class="line">        String currentEId = employeeService.getCurrentUser().geteId();</span><br><span class="line">        <span class="keyword">return</span> resumeService.getResumeList(currentEId, menuId, pageParam);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者将以下注解写在请求函数上面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"获取简历表信息"</span>, notes = <span class="string">"简历表信息"</span>)</span><br><span class="line"><span class="meta">@ApiImplicitParams</span>(&#123;</span><br><span class="line">        <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"menuId"</span>, value = <span class="string">"菜单Id"</span>, required = <span class="keyword">true</span>, dataType = <span class="string">"String"</span>, paramType = <span class="string">"form"</span>),</span><br><span class="line">        <span class="meta">@ApiImplicitParam</span>(name = <span class="string">"pageParam"</span>, value = <span class="string">"高级搜索参数"</span>, required = <span class="keyword">true</span>, dataType = <span class="string">"ListPageParam&lt;ResumeSelection&gt;"</span>, paramType = <span class="string">"form"</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="2、Model层"><a href="#2、Model层" class="headerlink" title="2、Model层"></a>2、Model层</h2><p>当方法的参数或返回类型涉及到类（Entity、Dto等），需要对类添加@ApiModel注解，对每一个变量添加@ApiModelProperty注解</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModel</span>(value=<span class="string">"简历搜索对象"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResumeSelection</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"用户名"</span>,name=<span class="string">"username"</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"邀约情况"</span>,name=<span class="string">"inviteStatus"</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer[] inviteStatus;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"是否注册"</span>,name=<span class="string">"isRegister"</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer isRegister;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"岗位名称"</span>,name=<span class="string">"jobName"</span>)</span><br><span class="line">    <span class="keyword">private</span> String jobName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"简历状态"</span>,name=<span class="string">"resumeStatus"</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer[] resumeStatus;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"所属机构id"</span>,name=<span class="string">"areaId"</span>)</span><br><span class="line">    <span class="keyword">private</span> String areaId;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty</span>(value=<span class="string">"招聘类型"</span>,name=<span class="string">"recruitStyle"</span>)</span><br><span class="line">    <span class="keyword">private</span> Integer[] recruitStyle;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//下面略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X#api" target="_blank" rel="noopener">Annotations 1.5.X</a><br><a href="https://github.com/caspar-chen/swagger-ui-layer" target="_blank" rel="noopener">swagger-ui-layer</a></p>
@@ -448,6 +453,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/03/RedisTokenStore源码分析/" rel="prev" title="RedisTokenStore源码分析">
+                RedisTokenStore源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -547,7 +556,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
